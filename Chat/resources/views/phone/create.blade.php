@@ -5,7 +5,7 @@
     <h1 class="page-header">Telefones</h1>
 
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('phone.index', ['userId' => $userId]) }}">Telefones</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('phone.index', $user) }}">Telefones</a></li>
         <li class="breadcrumb-item active">Enviar</li>
     </ol>
 
@@ -14,7 +14,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="text">Telefone</label>
-                <input type="hidden" name="user_id" value="{{ $userId }}">
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
                 <input type="text" name="number" class="form-control  {{ $errors->has('text') ? 'is-invalid' : '' }}"
                        placeholder="Telefone" required>
                 @if($errors->has('text'))

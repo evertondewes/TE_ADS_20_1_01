@@ -25,8 +25,18 @@ Auth::routes();
 
 Route::resource('message', 'MessageController');
 
-Route::resource('phone', 'PhoneController');
 
+Route::get('phone/{user}', 'PhoneController@index')->name('phone.index');
+
+Route::get('phone/create/{user}', 'PhoneController@create')->name('phone.create');
+
+Route::post('phone/store', 'PhoneController@store')->name('phone.store');
+
+Route::get('phone/{phone}/edit', 'PhoneController@edit')->name('phone.edit');
+
+Route::put('phone/{phone}', 'PhoneController@update')->name('phone.update');
+
+Route::delete('phone/{phone}', 'PhoneController@destroy')->name('phone.destroy');
 
 Route::get('/message/detalhes_extras/{message}', 'MessageController@detalhesExtras')->name('message.detalhesExtras');
 

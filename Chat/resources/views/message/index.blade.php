@@ -28,7 +28,7 @@
                 @foreach($messages as $message)
                     <tr>
                         <th><a href="{{ route('message.show', $message) }}" >{{ $message->id }}</a></th>
-                        <td><a href="{{ route('phone.index', ['userId' => $message->user_id]) }}">
+                        <td><a href="{{ route('phone.index', $message->user) }}">
                             {{ $message->user->name }} - {{ $message->user->email }}
                             </a>
                         </td>

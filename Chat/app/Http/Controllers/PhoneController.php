@@ -12,13 +12,11 @@ class PhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(\App\User $user)
     {
-        $userId = \request()->get('userId');
-
-        $user = \App\User::find($userId);
-
         $phones = $user->phones;
+
+
 
         return view('phone.index', ['phones' => $phones, 'user' => $user]);
     }
@@ -28,11 +26,9 @@ class PhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(\App\User $user)
     {
-        $userId = \request()->get('userId');
-
-        return view('phone.create', ['userId' => $userId]);
+         return view('phone.create', ['user' => $user]);
     }
 
     /**
@@ -52,7 +48,7 @@ class PhoneController extends Controller
             'class'=>'alert-success'
         ]);
 
-        return view('phone.create', ['userId' => $phoneNovo->user_id]);
+        return view('phone.create', ['user' => $phoneNovo->user]);
     }
 
     /**
@@ -74,11 +70,11 @@ class PhoneController extends Controller
      */
     public function edit(Phone $phone)
     {
-        if($phone->user_id == \Auth::user()->id) {
+//        if($phone->user_id == \Auth::user()->id) {
             return view('phone.edit', ['phone'=> $phone]);
-        } else {
-            throw new \Exception('Usuário não tem permissões para editar esse telefone!' . $phone->user_id .' - ' . \Auth::user()->id);
-        }
+//        } else {
+//            throw new \Exception('Usuário não tem permissões para editar esse telefone!' . $phone->user_id .' - ' . \Auth::user()->id);
+//        }
     }
 
     /**
@@ -90,18 +86,18 @@ class PhoneController extends Controller
      */
     public function update(Request $request, Phone $phone)
     {
-        if($phone->user_id == \Auth::user()->id) {
+//        if($phone->user_id == \Auth::user()->id) {
             $phone->update($request->all());
-        } else {
-            throw new \Exception('Usuário não tem permissões para atualizar esse número!');
-        }
+//        } else {
+//            throw new \Exception('Usuário não tem permissões para atualizar esse número!');
+//        }
 
         \Session::flash('flash_message', [
             'message'=>'Telefone alterado com sucesso!',
             'class'=>'alert-success'
         ]);
 
-        return redirect()->route('phone.index', ['userId' => $phone->user_id]);
+        return redirect()->route('phone.index', ['user' => $phone->user]);
     }
 
     /**
@@ -112,17 +108,17 @@ class PhoneController extends Controller
      */
     public function destroy(Phone $phone)
     {
-        if($phone->user_id == \Auth::user()->id) {
+//        if($phone->user_id == \Auth::user()->id) {
             $phone->delete();
-        } else {
-            throw new \Exception('Usuário não tem permissões para apagar esse telefone!' . $phone->user_id .' - ' . \Auth::user()->id);
-        }
+//        } else {
+//            throw new \Exception('Usuário não tem permissões para apagar esse telefone!' . $phone->user_id .' - ' . \Auth::user()->id);
+//        }
 
         \Session::flash('flash_message', [
             'message'=>'Número de telefone apagado!',
             'class'=>'alert-success'
         ]);
 
-        return redirect()->route('phone.index', ['userId' => $phone->user_id]);
+        return redirect()->route('phone.index',  ['user' => $phone->user]);
     }
 }

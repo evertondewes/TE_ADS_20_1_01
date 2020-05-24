@@ -7,7 +7,7 @@
         <h1 class="page-header">Telefones do {{ $user->name }} - {{ $user->email }}</h1>
 
         <p>
-            <a class="btn btn-info" href="{{ route('phone.create', ['userId' => $user->id]) }}" >Adicionar Telefone</a>
+            <a class="btn btn-info" href="{{ route('phone.create', $user) }}" >Adicionar Telefone</a>
         </p>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
