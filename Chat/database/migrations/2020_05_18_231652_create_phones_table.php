@@ -19,6 +19,7 @@ class CreatePhonesTable extends Migration
             $table->string('number');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
         });
     }
 

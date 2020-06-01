@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('text');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
         });
     }
 

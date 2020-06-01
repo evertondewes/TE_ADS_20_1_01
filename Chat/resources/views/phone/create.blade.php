@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="page-header">Telefones</h1>
+    <h1 class="page-header">Telefones do {{ $user->name }}</h1>
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('phone.index', $user) }}">Telefones</a></li>

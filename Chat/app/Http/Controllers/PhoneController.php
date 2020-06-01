@@ -15,9 +15,6 @@ class PhoneController extends Controller
     public function index(\App\User $user)
     {
         $phones = $user->phones;
-
-
-
         return view('phone.index', ['phones' => $phones, 'user' => $user]);
     }
 
@@ -28,7 +25,7 @@ class PhoneController extends Controller
      */
     public function create(\App\User $user)
     {
-         return view('phone.create', ['user' => $user]);
+        return view('phone.create', ['user' => $user]);
     }
 
     /**
@@ -39,16 +36,16 @@ class PhoneController extends Controller
      */
     public function store(Request $request)
     {
-        $phoneNovo = new \App\Phone($request->all());
+        $phoneNova = new \App\Phone($request->all());
 
-        $phoneNovo->save();
+        $phoneNova->save();
 
         \Session::flash('flash_message', [
             'message'=>'Telefone cadastrado com sucesso!',
             'class'=>'alert-success'
         ]);
 
-        return view('phone.create', ['user' => $phoneNovo->user]);
+        return view('phone.create', ['user' => $phoneNova->user]);
     }
 
     /**
@@ -110,7 +107,7 @@ class PhoneController extends Controller
     {
 //        if($phone->user_id == \Auth::user()->id) {
             $phone->delete();
-//        } else {
+            //        } else {
 //            throw new \Exception('Usuário não tem permissões para apagar esse telefone!' . $phone->user_id .' - ' . \Auth::user()->id);
 //        }
 
@@ -119,6 +116,7 @@ class PhoneController extends Controller
             'class'=>'alert-success'
         ]);
 
-        return redirect()->route('phone.index',  ['user' => $phone->user]);
+        return redirect()->route('phone.index', ['user' => $phone->user]);
     }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use DB;
 
 class MessageController extends Controller
 {
@@ -129,4 +130,13 @@ class MessageController extends Controller
         return view('message.detalhes_extras', ['message' => $message, 'u' => $usuario]);
     }
 
+    public function report() {
+        $rows = \DB::table('messages')
+            ->join('users', 'users.id', '=', 'messages.user_id')
+            ->select('users.id', 'users.name', DB::raw('count(*) as count'))
+            ->groupBy('users.id')
+            ->paginate(15);
+
+        return view('message.report', ['rows' => $rows]);
+    }
 }

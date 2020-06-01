@@ -60,7 +60,9 @@
                                     <a class="dropdown-item" href="{{ route('message.index') }}">
                                         Mensagens
                                     </a>
-
+                                    <a class="dropdown-item" href="{{ route('message.report') }}">
+                                        Relatório
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('sobre') }}"> Sobre</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
